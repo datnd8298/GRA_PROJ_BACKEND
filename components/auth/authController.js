@@ -45,3 +45,18 @@ exports.register = async (req, res) => {
     const user = await authService.createUser(newUser);
     res.json(user);
 }
+
+exports.changeInfo = async (req, res) => {
+    const updateUser = req.body;
+
+    if (await authService.isExist(updateUser.email)) {
+        res.json({ msg: 'There is an account used this email address! Can not creat new user' })
+    }
+    const user = await authService.updateUser(updateUser);
+    res.json(user);
+}
+
+exports.getList = async (req, res) => {
+    const users = await authService.getList()
+    res.json(users)
+}
