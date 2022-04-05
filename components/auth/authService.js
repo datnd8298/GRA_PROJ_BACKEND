@@ -36,9 +36,9 @@ exports.createUser = async (newUser) => {
     }
 }
 
-exports.updateUser = async (dataUser) => {
+exports.updateUser = async (userId, dataUser) => {
     try {
-        const user = await User.findOneAndUpdate(dataUser.email, dataUser, {
+        const user = await User.findByIdAndUpdate(userId, dataUser, {
             new: true,
         })
         return user

@@ -26,9 +26,9 @@ exports.login = async (req, res) => {
                         expiresIn: SECRET_ACCESS_TOKEN_EXPIRE,
                     }
                 )
-                res.json(token);
+                res.json(token)
             } else {
-                res.json({ msg: 'Wrong password' });
+                res.json({ msg: 'Wrong password' })
             }
         } else {
             console.log('Login false')
@@ -37,23 +37,28 @@ exports.login = async (req, res) => {
 }
 
 exports.register = async (req, res) => {
-    const newUser = req.body;
+    const newUser = req.body
 
     if (await authService.isExist(newUser.email)) {
-        res.json({ msg: 'There is an account used this email address! Can not creat new user' })
+        res.json({
+            msg: 'There is an account used this email address! Can not creat new user',
+        })
     }
-    const user = await authService.createUser(newUser);
-    res.json(user);
+    const user = await authService.createUser(newUser)
+    res.json(user)
 }
 
 exports.changeInfo = async (req, res) => {
-    const updateUser = req.body;
+    const userId = req.params.id
+    const updateUser = req.body
 
     if (await authService.isExist(updateUser.email)) {
-        res.json({ msg: 'There is an account used this email address! Can not creat new user' })
+        const user = await authService.updateUser(userId, updateUser)
+        res.json(user)
     }
-    const user = await authService.updateUser(updateUser);
-    res.json(user);
+    res.json({
+        msg: 'This user is not existed!',
+    })
 }
 
 exports.getList = async (req, res) => {

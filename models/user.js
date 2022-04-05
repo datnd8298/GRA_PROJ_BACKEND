@@ -7,11 +7,27 @@ const userSchema = new mongoose.Schema({
     first_name: { type: String, required: true, default: null },
     last_name: { type: String, required: true, default: null },
     per_id: { type: String, unique: true, default: null },
-    gender: { type: String, enum: ["MALE", "FEMALE", "OTHER"], default: "OTHER" },
+    gender: {
+        type: String,
+        enum: ['MALE', 'FEMALE', 'OTHER'],
+        default: 'OTHER',
+    },
     phone: { type: String, default: null },
     dob: { type: Date, default: null },
     address: { type: String, default: null },
-    position: { type: String, enum: [ 'receiptionist', 'customer_manager', 'chef', 'cook', 'accountant', 'labor', 'room_service' ], default: 'receiptionist'},
+    position: {
+        type: String,
+        enum: [
+            'receiptionist',
+            'customer_manager',
+            'chef',
+            'cook',
+            'accountant',
+            'labor',
+            'room_service',
+        ],
+        default: 'receiptionist',
+    },
     start_working: { type: Date, default: null },
 })
 
