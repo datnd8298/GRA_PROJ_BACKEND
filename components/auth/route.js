@@ -6,8 +6,6 @@ module.exports = (app) => {
 
     router.post('/login', authController.login)
     router.post('/register', authController.register)
-    router.get('/users', authController.getList)
-    router.post('/users/:id', authController.changeInfo)
 
     app.use('/api', router)
 }

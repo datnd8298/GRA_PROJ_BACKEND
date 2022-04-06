@@ -37,31 +37,18 @@ exports.login = async (req, res) => {
 }
 
 exports.register = async (req, res) => {
-    const newUser = req.body
+    try {
+        const newUser = req.body
 
-    if (await authService.isExist(newUser.email)) {
-        res.json({
-            msg: 'There is an account used this email address! Can not creat new user',
-        })
-    }
-    const user = await authService.createUser(newUser)
-    res.json(user)
-}
-
-exports.changeInfo = async (req, res) => {
-    const userId = req.params.id
-    const updateUser = req.body
-
-    if (await authService.isExist(updateUser.email)) {
-        const user = await authService.updateUser(userId, updateUser)
+        if (await authService.isExist(newUser.email)) {
+            res.json({
+                msg: 'There is an account used this email address! Can not creat new user',
+            })
+        }
+        const user = await authService.createUser(newUser)
         res.json(user)
+    } catch (e) {
+        console.log(e)
+        throw e
     }
-    res.json({
-        msg: 'This user is not existed!',
-    })
-}
-
-exports.getList = async (req, res) => {
-    const users = await authService.getList()
-    res.json(users)
 }
