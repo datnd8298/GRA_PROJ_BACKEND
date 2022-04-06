@@ -1,8 +1,8 @@
 const User = require('../../models/user')
 
-exports.isExist = async (email) => {
+exports.isExist = async (filter) => {
     try {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ filter })
         if (user) return true
         return false
     } catch (e) {
@@ -47,7 +47,17 @@ exports.getList = async (query) => {
     try {
         const { filter = {}, page = 0, size = 10 } = query
         const index = page * size
-        const user = await User.find(filter, {}, { skip: index, limit: size})
+        const user = await User.find(filter, {}, { skip: index, limit: size })
+        return user
+    } catch (e) {
+        console.log(e)
+        throw e
+    }
+}
+
+exports.getDetail = async (id) => {
+    try {
+        const user = await User.findById(id)
         return user
     } catch (e) {
         console.log(e)

@@ -1,5 +1,6 @@
 const config = require('config')
 const authService = require('./authService')
+const userService = require('../user/userService')
 const SECRET_ACCESS_TOKEN = config.get('auth.secret_access_token')
 const SECRET_ACCESS_TOKEN_EXPIRE = config.get('auth.secret_access_token_expire')
 const SECRET_REFRESH_ACCESS_TOKEN = config.get(
@@ -16,7 +17,7 @@ exports.login = async (req, res) => {
             res.status(400).send('All input is required')
         }
 
-        if (authService.isExist(email)) {
+        if (userService.isExist(email)) {
             const user = await getUser(email)
             if (authService.isValidPassword(password, user.password)) {
                 const token = jwt.sign(
@@ -40,7 +41,7 @@ exports.register = async (req, res) => {
     try {
         const newUser = req.body
 
-        if (await authService.isExist(newUser.email)) {
+        if (await userService.isExist({ email: newUser.email })) {
             res.json({
                 msg: 'There is an account used this email address! Can not creat new user',
             })

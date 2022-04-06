@@ -28,3 +28,14 @@ exports.getList = async (req, res) => {
         throw e
     }
 }
+
+exports.getDetail = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await userService.getDetail(id)
+        res.json(user)
+    } catch (e) {
+        console.log(e)
+        throw e
+    }
+}
