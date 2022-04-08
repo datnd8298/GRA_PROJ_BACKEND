@@ -7,7 +7,7 @@ exports.changeInfo = async (req, res) => {
         const update_bill = req.body
 
         if (await billService.isExist(update_bill.email)) {
-            const bill = await billService.updatebill(id, update_bill)
+            const bill = await billService.updateBill(id, update_bill)
             res.json(bill)
         }
         res.json({
@@ -45,7 +45,7 @@ exports.deleteBill = async (req, res) => {
     try {
         const id = req.params.id
         if (billService.isExist(id)) {
-            const bill = await billService.deletebill(id)
+            const bill = await billService.deleteBill(id)
             if (bill) {
                 res.json({msg: 'bill has been deleted'})
             }

@@ -1,9 +1,9 @@
-const Bill = require('../../models/bill')
+const Room = require('../../models/room')
 
 exports.isExist = async (filter) => {
     try {
-        const bill = await bill.findOne(filter)
-        if (bill) return true
+        const room = await room.findOne(filter)
+        if (room) return true
         return false
     } catch (e) {
         console.log(e)
@@ -11,32 +11,32 @@ exports.isExist = async (filter) => {
     }
 }
 
-exports.getBill = async (filter) => {
+exports.getRoom = async (email) => {
     try {
-        const bill = await Bill.find(filter)
-        return bill
+        const room = await Room.findOne(email)
+        return room
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.createBill = async (newbill) => {
+exports.createRoom = async (new_room) => {
     try {
-        const bill = await Bill.create(newbill)
-        return newbill
+        const room = await Room.create(new_room)
+        return newroom
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.updateBill = async (id, dataBill) => {
+exports.updateRoom = async (id, data_room) => {
     try {
-        const bill = await Bill.findByIdAndUpdate(id, dataBill, {
+        const room = await room.findByIdAndUpdate(id, data_room, {
             new: true,
         })
-        return bill
+        return room
     } catch (e) {
         console.log(e)
         throw e
@@ -47,8 +47,8 @@ exports.getList = async (query) => {
     try {
         const { filter = {}, page = 0, size = 10 } = query
         const index = page * size
-        const bill = await Bill.find(filter, {}, { skip: index, limit: size })
-        return bill
+        const room = await room.find(filter, {}, { skip: index, limit: size })
+        return room
     } catch (e) {
         console.log(e)
         throw e
@@ -57,19 +57,19 @@ exports.getList = async (query) => {
 
 exports.getDetail = async (id) => {
     try {
-        const bill = await Bill.findById(id)
-        return bill
+        const room = await Room.findById(id)
+        return room
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.deletebill = async (id) => {
+exports.deleteRoom = async (id) => {
     try {
-        await bill.findByIdAndDelete(id)
-        const bill = this.isExist(id)
-        if (bill) return false
+        await Room.findByIdAndDelete(id)
+        const room = this.isExist(id)
+        if (room) return false
         return true
     } catch (e) {
         console.log(e)
