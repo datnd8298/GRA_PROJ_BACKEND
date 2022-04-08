@@ -1,9 +1,9 @@
-const User = require('../../models/user')
+const Bill = require('../../models/bill')
 
 exports.isExist = async (filter) => {
     try {
-        const user = await User.findOne(filter)
-        if (user) return true
+        const bill = await bill.findOne(filter)
+        if (bill) return true
         return false
     } catch (e) {
         console.log(e)
@@ -11,32 +11,32 @@ exports.isExist = async (filter) => {
     }
 }
 
-exports.getUser = async (email) => {
+exports.getBill = async (email) => {
     try {
-        const user = await User.findOne(email)
-        return user
+        const bill = await Bill.findOne(email)
+        return bill
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.createUser = async (newUser) => {
+exports.createBill = async (newbill) => {
     try {
-        const user = await User.create(newUser)
-        return newUser
+        const bill = await Bill.create(newbill)
+        return newbill
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.updateUser = async (userId, dataUser) => {
+exports.updateBill = async (id, dataBill) => {
     try {
-        const user = await User.findByIdAndUpdate(userId, dataUser, {
+        const bill = await Bill.findByIdAndUpdate(id, dataBill, {
             new: true,
         })
-        return user
+        return bill
     } catch (e) {
         console.log(e)
         throw e
@@ -47,8 +47,8 @@ exports.getList = async (query) => {
     try {
         const { filter = {}, page = 0, size = 10 } = query
         const index = page * size
-        const user = await User.find(filter, {}, { skip: index, limit: size })
-        return user
+        const bill = await Bill.find(filter, {}, { skip: index, limit: size })
+        return bill
     } catch (e) {
         console.log(e)
         throw e
@@ -57,19 +57,19 @@ exports.getList = async (query) => {
 
 exports.getDetail = async (id) => {
     try {
-        const user = await User.findById(id)
-        return user
+        const bill = await Bill.findById(id)
+        return bill
     } catch (e) {
         console.log(e)
         throw e
     }
 }
 
-exports.deleteUser = async (id) => {
+exports.deletebill = async (id) => {
     try {
-        await User.findByIdAndDelete(id)
-        const user = this.isExist(id)
-        if (user) return false
+        await bill.findByIdAndDelete(id)
+        const bill = this.isExist(id)
+        if (bill) return false
         return true
     } catch (e) {
         console.log(e)

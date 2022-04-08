@@ -7,6 +7,7 @@ module.exports = (app) => {
     router.get('/users', userController.getList)
     router.post('/users/:id', userController.changeInfo)
     router.get('/users/:id', userController.getDetail)
+    router.get('/users/:id/delete', userController.deleteUser)
     
     app.use('/api', router);
 };
